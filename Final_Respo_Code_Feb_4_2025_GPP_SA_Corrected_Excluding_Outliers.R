@@ -395,23 +395,23 @@ T2_M_lmer <- lmer(GPP_SA_Corrected_cm2_hr ~ Nutrient_Treatment * Temp_Treatment 
                   data = filtered_data_MCAP_T2)
 summary(T2_M_lmer)
 
-# Perform ANOVA and Tukey posthoc test
+# Perform ANOVA. Since no significant interaciton occurs, no post-hoc is done. 
 T2_M_anova <- anova(T2_M_lmer)
 T2_M_anova
 
-T2_M_emm <- emmeans(T2_M_lmer, ~ Nutrient_Treatment * Temp_Treatment)
-T2_M_emm 
+#T2_M_emm <- emmeans(T2_M_lmer, ~ Nutrient_Treatment * Temp_Treatment)
+#T2_M_emm 
 
 # Define contrasts
-contrasts <- list(
-  "Control Ambient - Control Heated" = c(-1, 0, 0, 0, 1, 0, 0, 0),
-  "Effluent Ambient - Effluent Heated" = c(0, -1, 0, 0, 0, 1, 0, 0),
-  "Guano Ambient - Guano Heated" = c(0, 0, 1, 0, 0, 0, -1, 0),
-  "Inorganic Ambient - Inorganic Heated" = c(0, 0, 0, 1, 0, 0, 0, -1))
+#contrasts <- list(
+#  "Control Ambient - Control Heated" = c(-1, 0, 0, 0, 1, 0, 0, 0),
+#  "Effluent Ambient - Effluent Heated" = c(0, -1, 0, 0, 0, 1, 0, 0),
+#  "Guano Ambient - Guano Heated" = c(0, 0, 1, 0, 0, 0, -1, 0),
+#  "Inorganic Ambient - Inorganic Heated" = c(0, 0, 0, 1, 0, 0, 0, -1))
 
 # Perform contrasts with FDR adjustment
-contrast_M_T2 <- contrast(T2_M_emm, contrasts, adjust = "fdr")
-contrast_M_T2
+#contrast_M_T2 <- contrast(T2_M_emm, contrasts, adjust = "fdr")
+#contrast_M_T2
 
 # Print significant comparisons
 #significant_comparisons_M_T2 <- summary(contrast_M_T2) %>%

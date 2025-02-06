@@ -118,7 +118,7 @@ T0_M_plot <- ggplot(data = filtered_data_MCAP_T0,
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
   geom_text(data = counts, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) + 
-  labs(title = expression(italic("Montipora capitata") ~ "Net Primary Production at T0"),
+  labs(title = expression(italic("Montipora capitata") ~ "Oxygen Consumption at T0"),
        x = "Nutrient Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -203,7 +203,7 @@ T0_P_plot <- ggplot(data= filtered_data_PCOMP_T0,
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
   geom_text(data = counts, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) + 
-  labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T0"),
+  labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T0"),
        x = "Nutrient Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -285,7 +285,7 @@ T1_M_plot <- ggplot(data= filtered_data_MCAP_T1,
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
   geom_text(data = counts, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
-  labs(title = expression(italic("Montipora capitata") ~ "Net Primary Production at T1"),
+  labs(title = expression(italic("Montipora capitata") ~ "Oxygen Consumption at T1"),
        x = "Nutrient Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -356,7 +356,7 @@ T1_P_plot <- ggplot(data= filtered_data_PCOMP_T1,
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
   geom_text(data = counts, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
-  labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T1"),
+  labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T1"),
        x = "Nutrient Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -456,7 +456,7 @@ T2_M_plot <- ggplot(filtered_data_MCAP_T2,
   facet_wrap(~ Nutrient_Treatment, ncol = 4) +
   geom_text(data = counts, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
-  labs(title = expression(italic("Montipora capitata") ~ "Net Primary Production at T2"),
+  labs(title = expression(italic("Montipora capitata") ~ "Oxygen Consumption at T2"),
        x = "Temperature Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -554,7 +554,7 @@ T2_P_plot <- ggplot(filtered_data_PCOMP_T2,
   geom_text(data = counts, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
-  labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T2"),
+  labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T2"),
        x = "Temperature Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -627,7 +627,7 @@ T3_M_plot <- ggplot(data=filtered_data_MCAP_T3,
   geom_text(data = counts, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
-  labs(title = expression(italic("Montipora capitata") ~ "Net Primary Production at T3"),
+  labs(title = expression(italic("Montipora capitata") ~ "Oxygen Consumption at T3"),
        x = "Temperature Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -715,7 +715,7 @@ T3_P_plot <- ggplot(data=filtered_data_PCOMP_T3,
   geom_text(data = counts, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
-  labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T3"),
+  labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T3"),
        x = "Temperature Treatment",
        y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_fill_manual(values = c("Effluent" = "red1", "Control" = "cyan3", "Guano" = "palegreen3", "Inorganic" = "#FFCC00"), name = "Nutrient Treatment") +
@@ -752,7 +752,7 @@ legend <- get_legend(T0_M_plot + theme(legend.position = "bottom"))
 
 # Create a joint title as a separate plot
 joint_title <- ggdraw() + 
-  draw_label(expression(italic("Montipora capitata") ~ "Net Primary Production", fontface = "bold", size = 14))
+  draw_label(expression(italic("Montipora capitata") ~ "Oxygen Consumption", fontface = "bold", size = 14))
 
 # Combine everything: title, combined plots, and legend
 final_plot_M_T0 <- plot_grid(
@@ -791,7 +791,7 @@ legend <- get_legend(T0_P_plot + theme(legend.position = "bottom"))
 
 # Create a joint title as a separate plot
 joint_title_P <- ggdraw() + 
-  draw_label(expression(italic("Porites compressa") ~ "Net Primary Production", fontface = "bold", size = 14))
+  draw_label(expression(italic("Porites compressa") ~ "Oxygen Consumption", fontface = "bold", size = 14))
 
 # Combine everything: title, combined plots, and legend
 final_plot_P_T0 <- plot_grid(

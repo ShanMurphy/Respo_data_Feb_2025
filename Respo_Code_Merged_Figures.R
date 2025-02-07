@@ -148,7 +148,7 @@ filtered_data_MCAP_T2_GPP  <- respo_data %>%
   select(-Q1, -Q3, -IQR, -is_outlier) 
 
 # MCAP - T2 - R
-filtered_data_MCAP_T2_R  <- respo_data %>%
+filtered_data_MCAP_T2_R <- respo_data %>%
   filter(Species == "MCAP", Time_Point == "T2") %>%
   mutate(
     Q1 = quantile(R_SA_Corrected_cm2_hr, 0.25, na.rm = TRUE),
@@ -158,6 +158,8 @@ filtered_data_MCAP_T2_R  <- respo_data %>%
       R_SA_Corrected_cm2_hr > (Q3 + 1.5 * IQR)) %>%
   filter(!is_outlier) %>%  
   select(-Q1, -Q3, -IQR, -is_outlier) 
+
+table(filtered_data_MCAP_T2_R$is_outlier)
 #--------------------------------------------------------------------------------
 # MCAP - T3 - NPP 
 filtered_data_MCAP_T3_NPP <- respo_data%>%
@@ -393,7 +395,7 @@ counts_MCAP_T2_R <- filtered_data_MCAP_T2_R %>%
 counts_MCAP_T2_R
 
 # MCAP - T3
-counts_MCAP_T3_NPP <- filtered_data_MCAP_T2_NPP %>%
+counts_MCAP_T3_NPP <- filtered_data_MCAP_T3_NPP %>%
   group_by(Nutrient_Treatment, Temp_Treatment) %>%
   summarise(n = n(), .groups = "drop")
 counts_MCAP_T3_NPP
@@ -401,7 +403,7 @@ counts_MCAP_T3_NPP
 counts_MCAP_T3_GPP <- filtered_data_MCAP_T3_GPP %>% 
   group_by(Nutrient_Treatment, Temp_Treatment) %>%
   summarise(n = n(), .groups = "drop")
-counts_MCAP_T2_GPP
+counts_MCAP_T3_GPP
 
 counts_MCAP_T3_R <- filtered_data_MCAP_T3_R %>% 
   group_by(Nutrient_Treatment, Temp_Treatment) %>%
@@ -466,7 +468,7 @@ counts_PCOMP_T3_NPP
 counts_PCOMP_T3_GPP <- filtered_data_PCOMP_T3_GPP %>% 
   group_by(Nutrient_Treatment, Temp_Treatment) %>%
   summarise(n = n(), .groups = "drop")
-counts_PCOMP_T2_GPP
+counts_PCOMP_T3_GPP
 
 counts_PCOMP_T3_R <- filtered_data_PCOMP_T3_R %>% 
   group_by(Nutrient_Treatment, Temp_Treatment) %>%
@@ -825,7 +827,7 @@ T0_P_plot_NPP <- ggplot(data= filtered_data_PCOMP_T0_NPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T0_NPP, aes(x = Nutrient_Treatment, y = 0.15, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T0_NPP, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) + 
   labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T0"),
        x = "Nutrient Treatment",
@@ -844,7 +846,7 @@ T0_P_plot_GPP <- ggplot(data= filtered_data_PCOMP_T0_GPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T0_GPP, aes(x = Nutrient_Treatment, y = 0.15, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T0_GPP, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) + 
   labs(title = expression(italic("Porites compressa") ~ "Gross Primary Production at T0"),
        x = "Nutrient Treatment",
@@ -863,7 +865,7 @@ T0_P_plot_R <- ggplot(data= filtered_data_PCOMP_T0_R,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T0_R, aes(x = Nutrient_Treatment, y = 0.15, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T0_R, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) + 
   labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T0"),
        x = "Nutrient Treatment",
@@ -882,7 +884,7 @@ T1_P_plot_NPP <- ggplot(data= filtered_data_PCOMP_T1_NPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T1_NPP, aes(x = Nutrient_Treatment, y = 0.25, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T1_NPP, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T1"),
        x = "Nutrient Treatment",
@@ -901,7 +903,7 @@ T1_P_plot_GPP <- ggplot(data= filtered_data_PCOMP_T1_GPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T1_GPP, aes(x = Nutrient_Treatment, y = 0.5, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T1_GPP, aes(x = Nutrient_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   labs(title = expression(italic("Porites compressa") ~ "Gross Primary Production at T1"),
        x = "Nutrient Treatment",
@@ -939,7 +941,7 @@ T2_P_plot_NPP <- ggplot(filtered_data_PCOMP_T2_NPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T2_NPP, aes(x = Temp_Treatment, y = -0.2, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T2_NPP, aes(x = Temp_Treatment, y = -0.25, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
   labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T2"),
@@ -983,7 +985,7 @@ T2_P_plot_GPP <- ggplot(filtered_data_PCOMP_T2_GPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T2_GPP, aes(x = Temp_Treatment, y = -0.2, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T2_GPP, aes(x = Temp_Treatment, y = -0.25, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
   labs(title = expression(italic("Porites compressa") ~ "Gross Primary Production at T2"),
@@ -1000,7 +1002,7 @@ T2_P_plot_GPP
 annotations_P_T2_GPP <- data.frame(
   Nutrient_Treatment = c("Control", "Effluent", "Guano", "Inorganic"),
   Temp_Treatment = "Ambient",
-  y_position = c(4.5, 4.5, 4.0, 4.0), 
+  y_position = c(4.4, 4.4, 3.4, 3.4), 
   label = c("***", "***", "***", "***"))
 
 T2_P_plot_GPP <- T2_P_plot_GPP +
@@ -1027,7 +1029,7 @@ T2_P_plot_R <- ggplot(filtered_data_PCOMP_T2_R,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T2_R, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T2_R, aes(x = Temp_Treatment, y = -0.25, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
   labs(title = expression(italic("Porites compressa") ~ "Oxygen Consumption at T2"),
@@ -1047,7 +1049,7 @@ T3_P_plot_NPP <- ggplot(data=filtered_data_PCOMP_T3_NPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T3_NPP, aes(x = Temp_Treatment, y = -0.2, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T3_NPP, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
   labs(title = expression(italic("Porites compressa") ~ "Net Primary Production at T3"),
@@ -1067,7 +1069,7 @@ T3_P_plot_GPP <- ggplot(data=filtered_data_PCOMP_T3_GPP,
                         fill = Nutrient_Treatment)) +
   geom_boxplot(position = position_dodge(width = 0.8), alpha = 0.7) +
   geom_jitter(aes(color = Nutrient_Treatment), position = position_dodge(width = 0.8), alpha = 1) + 
-  geom_text(data = counts_PCOMP_T3_GPP, aes(x = Temp_Treatment, y = -0.2, label = paste0("n=", n)), 
+  geom_text(data = counts_PCOMP_T3_GPP, aes(x = Temp_Treatment, y = 0.0, label = paste0("n=", n)), 
             inherit.aes = FALSE, vjust = 0) +
   facet_wrap(~ Nutrient_Treatment, ncol=4) +
   labs(title = expression(italic("Porites compressa") ~ "Gross Primary Production at T3"),
@@ -1229,7 +1231,7 @@ combined_plot_M_T3
 #################################################################################
 #################################################################################
 T0_P_plot_modified_NPP <- T0_P_plot_NPP + 
-  scale_y_continuous(limits = c(0, 3.0), breaks = seq(-0, 3.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.0), breaks = seq(-0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("A) Net Primary Production")), y = expression("NPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   ggtitle(expression(italic("Porites compressa") ~ "T0 Metabolic Rates")) +  
   theme(legend.position = "none", 
@@ -1237,30 +1239,30 @@ T0_P_plot_modified_NPP <- T0_P_plot_NPP +
         plot.title = element_text(face = "bold", size = 16))
 
 T0_P_plot_modified_GPP <- T0_P_plot_GPP + 
-  scale_y_continuous(limits = c(0, 3.0), breaks = seq(0, 3.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.0), breaks = seq(0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("B) Gross Primary Production")), y = expression("GPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   theme(legend.position = "none", plot.title = element_blank())
 
 T0_P_plot_modified_R <- T0_P_plot_R + 
-  scale_y_continuous(limits = c(0, 3.0), breaks = seq(0, 3.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.0), breaks = seq(0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("C) [Respiration]")), y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   theme(legend.position = "none", 
         axis.title.x = element_blank(),
         plot.title = element_blank())
 
 # Combine all four modified plots
-combined_plot <- plot_grid(
+combined_plot_P_T0 <- plot_grid(
   T0_P_plot_modified_NPP, T0_P_plot_modified_GPP, T0_P_plot_modified_R,
   nrow = 1,  
   align = "hv",  
   rel_widths = c(1, 1),  
   rel_heights = c(1, 1))
 
-combined_plot
+combined_plot_P_T0
 
 #################################################################################
 T1_P_plot_modified_NPP <- T1_P_plot_NPP + 
-  scale_y_continuous(limits = c(0, 2.35), breaks = seq(-0, 2.35, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.5), breaks = seq(0, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("A) Net Primary Production")), y = expression("NPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   ggtitle(expression(italic("Porites compressa") ~ "T1 Metabolic Rates")) +  
   theme(legend.position = "none", 
@@ -1268,12 +1270,12 @@ T1_P_plot_modified_NPP <- T1_P_plot_NPP +
         plot.title = element_text(face = "bold", size = 16))
 
 T1_P_plot_modified_GPP <- T1_P_plot_GPP + 
-  scale_y_continuous(limits = c(0, 2.35), breaks = seq(0, 2.35, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.5), breaks = seq(0, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("B) Gross Primary Production")), y = expression("GPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   theme(legend.position = "none", plot.title = element_blank())
 
 T1_P_plot_modified_R <- T1_P_plot_R + 
-  scale_y_continuous(limits = c(0, 2.35), breaks = seq(0, 2.35, by = 0.25)) + 
+  scale_y_continuous(limits = c(0, 4.5), breaks = seq(0, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("C) [Respiration]")), y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   theme(legend.position = "none", 
         axis.title.x = element_blank(),
@@ -1289,7 +1291,7 @@ combined_plot_P_T1 <- plot_grid(
 combined_plot_P_T1
 #################################################################################
 T2_P_plot_modified_NPP <- T2_P_plot_NPP + 
-  scale_y_continuous(limits = c(-0.25, 1.75), breaks = seq(-0.25, 1.75, by = 0.25)) + 
+  scale_y_continuous(limits = c(-0.25, 4.5), breaks = seq(-0.25, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("A) Net Primary Production")), y = expression("NPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   ggtitle(expression(italic("Porites compressa") ~ "T2 Metabolic Rates")) +  
@@ -1298,13 +1300,13 @@ T2_P_plot_modified_NPP <- T2_P_plot_NPP +
         plot.title = element_text(face = "bold", size = 16))
 
 T2_P_plot_modified_GPP <- T2_P_plot_GPP + 
-  scale_y_continuous(limits = c(-0.25, 1.75), breaks = seq(-0.25, 1.75, by = 0.25)) + 
+  scale_y_continuous(limits = c(-0.25, 4.5), breaks = seq(-0.25, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("B) Gross Primary Production")), y = expression("GPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   theme(legend.position = "none", plot.title = element_blank())
 
 T2_P_plot_modified_R <- T2_P_plot_R + 
-  scale_y_continuous(limits = c(-0.25, 1.75), breaks = seq(-0.25, 1.75, by = 0.25)) + 
+  scale_y_continuous(limits = c(-0.25, 4.5), breaks = seq(-0.25, 4.5, by = 0.25)) + 
   labs(subtitle = expression(bold("C) [Respiration]")), y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   theme(legend.position = "none", 
@@ -1322,7 +1324,7 @@ combined_plot_P_T2
 
 #################################################################################
 T3_P_plot_modified_NPP <- T3_P_plot_NPP + 
-  scale_y_continuous(limits = c(-0.25, 2.0), breaks = seq(-0.25, 2.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0.0, 4.0), breaks = seq(0.0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("A) Net Primary Production")), y = expression("NPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   ggtitle(expression(italic("Porites compressa") ~ "T3 Metabolic Rates")) +  
@@ -1331,13 +1333,13 @@ T3_P_plot_modified_NPP <- T3_P_plot_NPP +
         plot.title = element_text(face = "bold", size = 16))
 
 T3_P_plot_modified_GPP <- T3_P_plot_GPP + 
-  scale_y_continuous(limits = c(-0.25, 2.0), breaks = seq(-0.25, 2.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0.0, 4.0), breaks = seq(0.0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("B) Gross Primary Production")), y = expression("GPP [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~ "]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   theme(legend.position = "none", plot.title = element_blank())
 
 T3_P_plot_modified_R <- T3_P_plot_R + 
-  scale_y_continuous(limits = c(-0.25, 2.0), breaks = seq(-0.25, 2.0, by = 0.25)) + 
+  scale_y_continuous(limits = c(0.0, 4.0), breaks = seq(0.0, 4.0, by = 0.25)) + 
   labs(subtitle = expression(bold("C) [Respiration]")), y = expression("Oxygen Consumption [µmol O"[2] ~ " cm"^"-2" ~ " hr"^"-1" ~"]")) +
   scale_x_discrete(labels = c("Ambient" = "Amb", "Heated" = "Heat")) +
   theme(legend.position = "none", 
